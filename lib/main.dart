@@ -1,4 +1,5 @@
 import 'package:epb_pos_flutter/pages/home_page.dart';
+import 'package:epb_pos_flutter/pages/pos_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -27,10 +28,10 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
           fontFamily: GoogleFonts.lato().fontFamily,
-          primaryTextTheme: GoogleFonts.latoTextTheme()),
+          textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme)),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       initialRoute: "/home",
-      routes: {"/home": (context) => const HomePage()},
+      routes: {"/home": (context) => const PosPage()},
     );
   }
 }

@@ -6,8 +6,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return  Scaffold(
         appBar: AppBar(
           title: const Text("Dashboard"),
         ),
@@ -97,7 +96,7 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
+
   }
 }
