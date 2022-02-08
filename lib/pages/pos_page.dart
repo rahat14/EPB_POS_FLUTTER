@@ -1,7 +1,11 @@
+import 'package:epb_pos_flutter/controllers/database_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PosPage extends StatelessWidget {
-  const PosPage({Key? key}) : super(key: key);
+  final offlineDatabaseController = Get.put(DatabaseController());
+
+   PosPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +47,9 @@ class PosPage extends StatelessWidget {
                   decoration: BoxDecoration(color: Colors.white),
                 ),
               )
-
             ],
             verticalDirection: VerticalDirection.up,
-          ) ,
-
+          ),
         ],
       ),
     );

@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme)),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       initialRoute: "/home",
-      routes: {"/home": (context) => const PosPage()},
+      routes: {"/home": (context) =>  PosPage()},
     );
   }
 }

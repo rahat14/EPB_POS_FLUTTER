@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:path/path.dart' as p;
@@ -31,6 +32,19 @@ class AppDatabase extends _$AppDatabase {
   // Migrations will be covered in the next part.
   @override
   int get schemaVersion => 1;
+
+  // queries
+  Future<List<Product>> getAllProducts() => select(products).get();
+
+  Future insertProduct(Product product) => into(products).insert(product);
+
+  Future insertProducts(List<Product> productss) async {
+    await batch((batch) => batch.insertAll(products, productss));
+  }
+
+  Future updateProduct(Product product) => update(products).replace(product);
+
+  Stream<List<Product>> watchAllProducts() => select(products).watch();
 }
 
 LazyDatabase _openConnection() {
