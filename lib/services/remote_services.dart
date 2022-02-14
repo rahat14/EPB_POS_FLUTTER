@@ -12,7 +12,7 @@ class RemoteServices {
     var response = await client.get(Uri.https(_authority, _path));
     if (response.statusCode == 200) {
       var jsonString = response.body;
-      return ProductModels.fromJson(jsonString).items;
+      return productModelsFromJson(jsonString).items;
     } else {
       return null;
     }

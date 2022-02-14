@@ -10,7 +10,7 @@ class ProductModels {
 }
 
   ProductModels.fromJson(dynamic json) {
-    _totalItems = json['total_items'];
+  //  _totalItems = json['total_items'];
     if (json['items'] != null) {
       _items = [];
       json['items'].forEach((v) {

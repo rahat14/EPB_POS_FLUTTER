@@ -18,6 +18,14 @@ class DatabaseController extends GetxController {
     print(" list size -> ${list.length}");
   }
 
+  void addListOFProduct(List<ProductsCompanion> convertedList) {
+    database.insertProducts(convertedList);
+    print("data added locally ");
+  }
+  void deleteAllFromProductTable(){
+    database.deleteAllProduct();
+  }
+
   void addProduct(Product product) {
     database.insertProduct(product);
   }

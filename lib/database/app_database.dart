@@ -11,40 +11,79 @@ part 'app_database.g.dart';
 class Products extends Table {
   IntColumn get id => integer().autoIncrement()();
 
+  TextColumn get onlineID => text()();
+
   TextColumn get name => text()();
 
-  TextColumn get desc => text()();
+  TextColumn get code => text()();
 
-  TextColumn get company => text()();
+  TextColumn get customCode => text()();
 
-  IntColumn get stock => integer()();
+  TextColumn get typeId => text()();
+
+  TextColumn get categoryId => text()();
+
+  TextColumn get purchasePrice => text()();
+
+  TextColumn get salePrice => text()();
+
+  TextColumn get brandId => text()();
+
+  TextColumn get color => text()();
+
+  TextColumn get size => text()();
+
+  TextColumn get waight => text()();
+
+  TextColumn get alertQuantity => text()();
+
+  TextColumn get vatId => text()();
+
+  TextColumn get unitId => text()();
+
+  TextColumn get userId => text()();
+
+  TextColumn get companyId => text()();
+
+  TextColumn get availableForSubscription => text()();
+
+  TextColumn get featuredItem => text()();
+
+  TextColumn get pcOriginalThumb => text()();
+
+  TextColumn get pcMobileThumb => text()();
+
+  TextColumn get pcTebThumb => text()();
+
+  TextColumn get status => text()();
+
+  TextColumn get delStatus => text()();
+
+  TextColumn get productionItem => text()();
 }
 
-// This annotation tells the code generator which tables this DB works with
 @DriftDatabase(tables: [Products])
-// _$AppDatabase is the name of the generated class
 class AppDatabase extends _$AppDatabase {
-  AppDatabase()
-      // Specify the location of the database file
-      : super(_openConnection());
+  AppDatabase() : super(_openConnection());
 
   // Bump this when changing tables and columns.
   // Migrations will be covered in the next part.
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 3;
 
   // queries
   Future<List<Product>> getAllProducts() => select(products).get();
 
   Future insertProduct(Product product) => into(products).insert(product);
 
-  Future insertProducts(List<Product> productss) async {
+  Future insertProducts(List<ProductsCompanion> productss) async {
     await batch((batch) => batch.insertAll(products, productss));
   }
 
   Future updateProduct(Product product) => update(products).replace(product);
 
-  Stream<List<Product>> watchAllProducts() => select(products).watch();
+  Future deleteAllProduct() =>
+      (delete(products)..where((t) => t.id.isBiggerThanValue(0))).go();
 }
 
 LazyDatabase _openConnection() {
