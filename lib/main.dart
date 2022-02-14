@@ -1,5 +1,4 @@
 import 'package:epb_pos_flutter/pages/home_page.dart';
-import 'package:epb_pos_flutter/pages/pos_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme)),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       initialRoute: "/home",
-      routes: {"/home": (context) =>  PosPage()},
+      routes: {"/home": (context) => HomePage()},
     );
   }
 }

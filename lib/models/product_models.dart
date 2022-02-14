@@ -1,18 +1,16 @@
 import 'dart:convert';
-
-ProductModels productModelsFromJson(String str) =>
-    ProductModels.fromJson(json.decode(str));
-
+ProductModels productModelsFromJson(String str) => ProductModels.fromJson(json.decode(str));
 String productModelsToJson(ProductModels data) => json.encode(data.toJson());
-
 class ProductModels {
   ProductModels({
-    List<Items>? items,
-  }) {
+      int? totalItems, 
+      List<Items>? items,}){
+    _totalItems = totalItems;
     _items = items;
-  }
+}
 
   ProductModels.fromJson(dynamic json) {
+    _totalItems = json['total_items'];
     if (json['items'] != null) {
       _items = [];
       json['items'].forEach((v) {
@@ -20,60 +18,60 @@ class ProductModels {
       });
     }
   }
-
+  int? _totalItems;
   List<Items>? _items;
 
+  int? get totalItems => _totalItems;
   List<Items>? get items => _items;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['total_items'] = _totalItems;
     if (_items != null) {
       map['items'] = _items?.map((v) => v.toJson()).toList();
     }
     return map;
   }
+
 }
 
 Items itemsFromJson(String str) => Items.fromJson(json.decode(str));
-
 String itemsToJson(Items data) => json.encode(data.toJson());
-
 class Items {
   Items({
-    String? id,
-    String? code,
-    String? customCode,
-    String? name,
-    String? typeId,
-    String? categoryId,
-    String? purchasePrice,
-    dynamic dealerPrice,
-    String? salePrice,
-    String? brandId,
-    String? color,
-    String? size,
-    String? waight,
-    dynamic material,
-    String? alertQuantity,
-    String? vatId,
-    String? unitId,
-    String? userId,
-    dynamic expiryDate,
-    String? companyId,
-    String? availableForSubscription,
-    String? featuredItem,
-    String? pcOriginalThumb,
-    String? pcMobileThumb,
-    String? pcTebThumb,
-    String? pcDesktopThumb,
-    dynamic perishableStatus,
-    dynamic perishableDays,
-    String? productionItem,
-    String? delStatus,
-    String? status,
-    String? rowUpdated,
-    String? description,
-  }) {
+      String? id, 
+      String? code, 
+      String? customCode, 
+      String? name, 
+      String? typeId, 
+      String? categoryId, 
+      String? purchasePrice, 
+      dynamic dealerPrice, 
+      String? salePrice, 
+      String? brandId, 
+      String? color, 
+      String? size, 
+      String? waight, 
+      dynamic material, 
+      String? alertQuantity, 
+      String? vatId, 
+      String? unitId, 
+      String? userId, 
+      dynamic expiryDate, 
+      String? companyId, 
+      String? availableForSubscription, 
+      String? featuredItem, 
+      String? pcOriginalThumb, 
+      String? pcMobileThumb, 
+      String? pcTebThumb, 
+      String? pcDesktopThumb, 
+      dynamic perishableStatus, 
+      dynamic perishableDays, 
+      String? productionItem, 
+      String? delStatus, 
+      String? status, 
+      String? rowUpdated, 
+      String? description,}){
     _id = id;
     _code = code;
     _customCode = customCode;
@@ -107,7 +105,7 @@ class Items {
     _status = status;
     _rowUpdated = rowUpdated;
     _description = description;
-  }
+}
 
   Items.fromJson(dynamic json) {
     _id = json['id'];
@@ -144,7 +142,6 @@ class Items {
     _rowUpdated = json['row_updated'];
     _description = json['description'];
   }
-
   String? _id;
   String? _code;
   String? _customCode;
@@ -180,69 +177,37 @@ class Items {
   String? _description;
 
   String? get id => _id;
-
   String? get code => _code;
-
   String? get customCode => _customCode;
-
   String? get name => _name;
-
   String? get typeId => _typeId;
-
   String? get categoryId => _categoryId;
-
   String? get purchasePrice => _purchasePrice;
-
   dynamic get dealerPrice => _dealerPrice;
-
   String? get salePrice => _salePrice;
-
   String? get brandId => _brandId;
-
   String? get color => _color;
-
   String? get size => _size;
-
   String? get waight => _waight;
-
   dynamic get material => _material;
-
   String? get alertQuantity => _alertQuantity;
-
   String? get vatId => _vatId;
-
   String? get unitId => _unitId;
-
   String? get userId => _userId;
-
   dynamic get expiryDate => _expiryDate;
-
   String? get companyId => _companyId;
-
   String? get availableForSubscription => _availableForSubscription;
-
   String? get featuredItem => _featuredItem;
-
   String? get pcOriginalThumb => _pcOriginalThumb;
-
   String? get pcMobileThumb => _pcMobileThumb;
-
   String? get pcTebThumb => _pcTebThumb;
-
   String? get pcDesktopThumb => _pcDesktopThumb;
-
   dynamic get perishableStatus => _perishableStatus;
-
   dynamic get perishableDays => _perishableDays;
-
   String? get productionItem => _productionItem;
-
   String? get delStatus => _delStatus;
-
   String? get status => _status;
-
   String? get rowUpdated => _rowUpdated;
-
   String? get description => _description;
 
   Map<String, dynamic> toJson() {
@@ -282,4 +247,5 @@ class Items {
     map['description'] = _description;
     return map;
   }
+
 }
