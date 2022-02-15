@@ -1,6 +1,7 @@
 import 'package:epb_pos_flutter/pages/home_page.dart';
 import 'package:epb_pos_flutter/pages/pos_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Epb Pos',
       themeMode: ThemeMode.dark,
       theme: ThemeData(
@@ -31,7 +32,10 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme)),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       initialRoute: "/home",
-      routes: {"/home": (context) => PosPage()},
+      routes: {
+        "/home": (context) => HomePage(),
+        '/pos': (context) => PosPage()
+      },
     );
   }
 }

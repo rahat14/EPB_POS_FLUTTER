@@ -71,6 +71,16 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 3;
 
+  @override
+  MigrationStrategy get migration => MigrationStrategy(
+      onCreate: (Migrator m) {
+        return m.createAll();
+      },
+      onUpgrade: (Migrator m, int from, int to) async {
+
+      }
+  );
+
   // queries
   Future<List<Product>> getAllProducts() => select(products).get();
 
@@ -95,4 +105,7 @@ LazyDatabase _openConnection() {
     final file = File(p.join(dbFolder.path, 'epb_pos_db.sqlite'));
     return NativeDatabase(file);
   });
+
+
+
 }

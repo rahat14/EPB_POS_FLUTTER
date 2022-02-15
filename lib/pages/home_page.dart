@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
                   height: 200,
                   width: 200,
                   child: InkWell(
-                    onTap: () =>   HelperClass.showToast("File Uploaded"),
+                    onTap: () =>   Get.toNamed("/pos"),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
