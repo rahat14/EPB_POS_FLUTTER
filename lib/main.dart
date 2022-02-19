@@ -1,7 +1,8 @@
 import 'package:epb_pos_flutter/pages/home_page.dart';
-import 'package:epb_pos_flutter/pages/pos_page.dart';
+import 'package:epb_pos_flutter/pages/product_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -15,28 +16,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Epb Pos',
-      themeMode: ThemeMode.dark,
-      theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
-          primarySwatch: Colors.blue,
-          fontFamily: GoogleFonts.lato().fontFamily,
-          textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme)),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      initialRoute: "/home",
-      routes: {
-        "/home": (context) => HomePage(),
-        '/pos': (context) => PosPage()
-      },
-    );
+        title: 'Epb Pos',
+        themeMode: ThemeMode.dark,
+        theme: ThemeData(
+            // This is the theme of your application.
+            //
+            // Try running your application with "flutter run". You'll see the
+            // application has a blue toolbar. Then, without quitting the app, try
+            // changing the primarySwatch below to Colors.green and then invoke
+            // "hot reload" (press "r" in the console where you ran "flutter run",
+            // or simply save your changes to "hot reload" in a Flutter IDE).
+            // Notice that the counter didn't reset back to zero; the application
+            // is not restarted.
+            primarySwatch: Colors.blue,
+            fontFamily: GoogleFonts.lato().fontFamily,
+            textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme)),
+        // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        initialRoute: "/home",
+        getPages: [
+          GetPage(name: '/home', page: () => HomePage()),
+          GetPage(name: '/pos', page: () => ProductListPage())
+        ]);
   }
 }
 

@@ -26,6 +26,7 @@ class DatabaseController extends GetxController {
     database.deleteAllProduct();
   }
 
+
   void addProduct(Product product) {
     database.insertProduct(product);
   }

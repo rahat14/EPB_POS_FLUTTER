@@ -62,29 +62,84 @@ class Products extends Table {
   TextColumn get productionItem => text()();
 }
 
-@DriftDatabase(tables: [Products])
+class RunningCartProduct extends Table {
+  IntColumn get id => integer().autoIncrement()();
+
+  TextColumn get onlineID => text()();
+
+  TextColumn get name => text()();
+
+  TextColumn get code => text()();
+
+  TextColumn get customCode => text()();
+
+  TextColumn get typeId => text()();
+
+  TextColumn get categoryId => text()();
+
+  TextColumn get purchasePrice => text()();
+
+  TextColumn get salePrice => text()();
+
+  TextColumn get brandId => text()();
+
+  TextColumn get color => text()();
+
+  TextColumn get size => text()();
+
+  TextColumn get waight => text()();
+
+  TextColumn get alertQuantity => text()();
+
+  TextColumn get vatId => text()();
+
+  TextColumn get unitId => text()();
+
+  TextColumn get userId => text()();
+
+  TextColumn get companyId => text()();
+
+  TextColumn get availableForSubscription => text()();
+
+  TextColumn get featuredItem => text()();
+
+  TextColumn get pcOriginalThumb => text()();
+
+  TextColumn get pcMobileThumb => text()();
+
+  TextColumn get pcTebThumb => text()();
+
+  TextColumn get status => text()();
+
+  TextColumn get delStatus => text()();
+
+  TextColumn get productionItem => text()();
+}
+
+@DriftDatabase(tables: [Products, RunningCartProduct])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   // Bump this when changing tables and columns.
   // Migrations will be covered in the next part.
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 5;
 
   @override
-  MigrationStrategy get migration => MigrationStrategy(
-      onCreate: (Migrator m) {
+  MigrationStrategy get migration => MigrationStrategy(onCreate: (Migrator m) {
         return m.createAll();
-      },
-      onUpgrade: (Migrator m, int from, int to) async {
-
-      }
-  );
+      }, onUpgrade: (Migrator m, int from, int to) async {
+        await m.createAll();
+      });
 
   // queries
   Future<List<Product>> getAllProducts() => select(products).get();
 
   Future insertProduct(Product product) => into(products).insert(product);
+
+  // Future insertProductInRunningCart(ProductsCompanion item ) => into(runningCartProduct).insert(
+  //     item, mode: InsertMode.insertOrReplace
+  // );
 
   Future insertProducts(List<ProductsCompanion> productss) async {
     await batch((batch) => batch.insertAll(products, productss));
@@ -105,7 +160,4 @@ LazyDatabase _openConnection() {
     final file = File(p.join(dbFolder.path, 'epb_pos_db.sqlite'));
     return NativeDatabase(file);
   });
-
-
-
 }
