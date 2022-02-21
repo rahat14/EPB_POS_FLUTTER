@@ -75,55 +75,20 @@ class RunningCartProduct extends Table {
 
   TextColumn get typeId => text()();
 
-  TextColumn get categoryId => text()();
-
   TextColumn get purchasePrice => text()();
 
   TextColumn get salePrice => text()();
 
-  TextColumn get brandId => text()();
-
-  TextColumn get color => text()();
-
-  TextColumn get size => text()();
-
-  TextColumn get waight => text()();
-
-  TextColumn get alertQuantity => text()();
-
-  TextColumn get vatId => text()();
-
-  TextColumn get unitId => text()();
-
-  TextColumn get userId => text()();
-
-  TextColumn get companyId => text()();
-
-  TextColumn get availableForSubscription => text()();
-
-  TextColumn get featuredItem => text()();
-
-  TextColumn get pcOriginalThumb => text()();
-
-  TextColumn get pcMobileThumb => text()();
-
-  TextColumn get pcTebThumb => text()();
-
-  TextColumn get status => text()();
-
-  TextColumn get delStatus => text()();
-
-  TextColumn get productionItem => text()();
+  IntColumn get cartQty => integer()();
 }
 
 @DriftDatabase(tables: [Products, RunningCartProduct])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
-  // Bump this when changing tables and columns.
-  // Migrations will be covered in the next part.
+
   @override
-  int get schemaVersion => 5;
+  int get schemaVersion => 7;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(onCreate: (Migrator m) {
@@ -137,9 +102,11 @@ class AppDatabase extends _$AppDatabase {
 
   Future insertProduct(Product product) => into(products).insert(product);
 
-  // Future insertProductInRunningCart(ProductsCompanion item ) => into(runningCartProduct).insert(
-  //     item, mode: InsertMode.insertOrReplace
-  // );
+  Future insertProductInRunningCart(RunningCartProductCompanion item ) => into(runningCartProduct).insert(
+      item, mode: InsertMode.insertOrReplace
+  );
+
+  Future<List<RunningCartProductData>> getAllRunningCartProducts() => select(runningCartProduct).get();
 
   Future insertProducts(List<ProductsCompanion> productss) async {
     await batch((batch) => batch.insertAll(products, productss));

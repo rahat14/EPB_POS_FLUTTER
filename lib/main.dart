@@ -1,4 +1,5 @@
 import 'package:epb_pos_flutter/pages/home_page.dart';
+import 'package:epb_pos_flutter/pages/pos_page.dart';
 import 'package:epb_pos_flutter/pages/product_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -35,7 +36,8 @@ class MyApp extends StatelessWidget {
         initialRoute: "/home",
         getPages: [
           GetPage(name: '/home', page: () => HomePage()),
-          GetPage(name: '/pos', page: () => ProductListPage())
+          GetPage(name: '/pos', page: () => ProductListPage()),
+          GetPage(name: '/pos_page', page: () => PosPage())
         ]);
   }
 }

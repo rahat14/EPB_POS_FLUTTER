@@ -11,13 +11,27 @@ class ProductListPage extends StatelessWidget {
 
   // ProductListPage({Key? key}) : super(key: key);
 
-  final TextEditingController _textEditingController =  TextEditingController() ;
+  final TextEditingController _textEditingController = TextEditingController();
+
+  ProductListPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    _textEditingController.text = "1" ;
+    _textEditingController.text = "1";
     return Scaffold(
       appBar: AppBar(
         title: const Text("Point Of Sale"),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.add_shopping_cart,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              Get.toNamed("/pos_page");
+            },
+          )
+        ],
       ),
       body: Obx(() {
         return Column(
@@ -63,9 +77,10 @@ class ProductListPage extends StatelessWidget {
                 itemCount: offlineDatabaseController.offlineProducts.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: buildPosItemRow(
-                        offlineDatabaseController.offlineProducts[index]),
-                    onTap: () => createStockDialogue( offlineDatabaseController.offlineProducts[index]));
+                      title: buildProductItemRow(
+                          offlineDatabaseController.offlineProducts[index]),
+                      onTap: () => createStockDialogue(
+                          offlineDatabaseController.offlineProducts[index]));
                 },
               ),
             )
@@ -86,7 +101,12 @@ class ProductListPage extends StatelessWidget {
       confirm: ElevatedButton(
         child: const Text("Add Product"),
         onPressed: () {
+          int qty = int.parse(_textEditingController.value.text);
 
+          if (qty > 0) {
+            offlineDatabaseController.addProductToRunningCart(
+                offlineProduct, qty);
+          }
         },
       ),
       cancel: ElevatedButton(
@@ -102,7 +122,8 @@ class ProductListPage extends StatelessWidget {
             TextField(
               controller: _textEditingController,
               autofocus: true,
-              decoration: const InputDecoration(hintText: 'Enter Your Quantity'),
+              decoration:
+                  const InputDecoration(hintText: 'Enter Your Quantity'),
               keyboardType: TextInputType.number,
               inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             )
