@@ -41,6 +41,5 @@ class SyncController extends GetxController {
     }
     localDb.addListOFProduct(convertedList);
     isLoading(false);
-    HelperClass.showToast("Sync Completed...");
   }
 }

@@ -6,6 +6,11 @@ import 'package:get/get.dart';
 class DatabaseController extends GetxController {
   var offlineProducts =
       List<Product>.empty().obs; // init the empty list  with null safety
+
+  var allSales = List<SoldCartDetail>.empty().obs;
+
+  var salesHistoryProducts = List<SoldCartProduct>.empty().obs;
+
   List<Product> mainList = [];
 
   AppDatabase database = LocalService().getDatabase();
@@ -23,9 +28,9 @@ class DatabaseController extends GetxController {
     print(" list size -> ${list.length}");
   }
 
-  void addListOFProduct(List<ProductsCompanion> convertedList) {
-    database.insertProducts(convertedList);
-    print("data added locally ");
+  void addListOFProduct(List<ProductsCompanion> convertedList) async {
+    await  database.insertProducts(convertedList);
+    HelperClass.showToast("Sync Completed. ${convertedList.length.toString()} products added") ;
   }
 
   void deleteAllFromProductTable() {
@@ -67,12 +72,29 @@ class DatabaseController extends GetxController {
       offlineProducts.value = filteredList;
     }
   }
-  void resetSearch(){
+
+  void resetSearch() {
     offlineProducts.value = mainList;
   }
 
-  void getRunningCartProducts() async {
-    var list = await database.getAllProducts();
-    offlineProducts.value = list;
+  void getSoldCartProducts(String id ) async {
+    var list = await database.getListOfSoldProductByCartId(id);
+    salesHistoryProducts.value = list;
+  }
+
+  void getSellsHistory() async {
+    var list = await database.getAllSellHistory();
+    allSales.value = list;
+  }
+
+  double countTotal(List<SoldCartProduct> list) {
+   double  totalValue = 0.0;
+    for (var item in list) {
+      var price = double.parse(item.salePrice);
+      var qty = item.cartQty;
+      double totalPrice = price * qty;
+      totalValue = (totalValue + totalPrice);
+    }
+    return totalValue;
   }
 }

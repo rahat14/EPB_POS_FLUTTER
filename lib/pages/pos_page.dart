@@ -43,12 +43,17 @@ class PosPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       const Flexible(
-                        child: Text("Total Price - " , style: TextStyle(fontSize: 16 , fontWeight: FontWeight.bold ),),
+                        child: Text("Total Price - ", style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),),
                       ),
                       Text(cartController
                           .countTotal(cartController.cartProducts)
-                          .toString() , style: const TextStyle(fontSize: 17 , fontWeight: FontWeight.bold , color: Colors.black ) ),
-                      const Text(" ৳  " , style: TextStyle(fontSize: 16 , fontWeight: FontWeight.bold ))
+                          .toString(), style: const TextStyle(fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black)),
+                      const Text(" ৳  ",
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight
+                              .bold))
                     ],
                   ),
                   Padding(
@@ -57,25 +62,27 @@ class PosPage extends StatelessWidget {
                       children: [
                         Expanded(
                             child: MaterialButton(
-                          onPressed: () {},
-                          textColor: Colors.white,
-                          color: Colors.red,
-                          child: const Text("Cancel"),
-                        )),
+                              onPressed: () {},
+                              textColor: Colors.white,
+                              color: Colors.red,
+                              child: const Text("Cancel"),
+                            )),
                         Expanded(
                             child: MaterialButton(
-                          onPressed: () {},
-                          textColor: Colors.white,
-                          color: Colors.blueAccent,
-                          child: const Text("Hold"),
-                        )),
+                              onPressed: () {},
+                              textColor: Colors.white,
+                              color: Colors.blueAccent,
+                              child: const Text("Hold"),
+                            )),
                         Expanded(
                             child: MaterialButton(
-                          onPressed: () {},
-                          textColor: Colors.white,
-                          color: Colors.green,
-                          child: const Text("Confirm"),
-                        ))
+                              onPressed: () {
+                                cartController.insertSellDetails();
+                              },
+                              textColor: Colors.white,
+                              color: Colors.green,
+                              child: const Text("Confirm"),
+                            ))
                       ],
                     ),
                   )

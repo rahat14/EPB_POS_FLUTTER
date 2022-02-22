@@ -82,12 +82,41 @@ class RunningCartProduct extends Table {
   IntColumn get cartQty => integer()();
 }
 
-@DriftDatabase(tables: [Products, RunningCartProduct])
+class SoldCartProducts extends Table {
+  IntColumn get id => integer().autoIncrement()();
+
+  TextColumn get cartId => text()();
+
+  TextColumn get onlineID => text()();
+
+  TextColumn get name => text()();
+
+  TextColumn get code => text()();
+
+  TextColumn get customCode => text()();
+
+  TextColumn get typeId => text()();
+
+  TextColumn get purchasePrice => text()();
+
+  TextColumn get salePrice => text()();
+
+  IntColumn get cartQty => integer()();
+}
+
+class SoldCartDetails extends Table {
+  TextColumn get cartId => text()();
+
+  TextColumn get name => text()();
+}
+
+@DriftDatabase(
+    tables: [Products, RunningCartProduct, SoldCartProducts, SoldCartDetails])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
-  int get schemaVersion => 7;
+  int get schemaVersion => 8;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(onCreate: (Migrator m) {
@@ -113,6 +142,20 @@ class AppDatabase extends _$AppDatabase {
   Future insertProducts(List<ProductsCompanion> productss) async {
     await batch((batch) => batch.insertAll(products, productss));
   }
+
+  Future<List<SoldCartDetail>> getAllSellHistory() =>
+      select(soldCartDetails).get();
+
+  Future<List<SoldCartProduct>> getListOfSoldProductByCartId(String cartID) =>
+      (select(soldCartProducts)..where((t) => t.cartId.equals(cartID))).get();
+
+  Future insertProductsOnSoldCartProducts(
+      List<SoldCartProductsCompanion> items) async {
+    await batch((batch) => batch.insertAll(soldCartProducts, items));
+  }
+
+  Future insertCartDetailsOnSoldCartDetails(SoldCartDetailsCompanion item) =>
+      into(soldCartDetails).insert(item);
 
   Future updateProduct(Product product) => update(products).replace(product);
 

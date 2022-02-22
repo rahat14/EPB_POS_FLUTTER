@@ -1560,14 +1560,672 @@ class $RunningCartProductTable extends RunningCartProduct
   }
 }
 
+class SoldCartProduct extends DataClass implements Insertable<SoldCartProduct> {
+  final int id;
+  final String cartId;
+  final String onlineID;
+  final String name;
+  final String code;
+  final String customCode;
+  final String typeId;
+  final String purchasePrice;
+  final String salePrice;
+  final int cartQty;
+  SoldCartProduct(
+      {required this.id,
+      required this.cartId,
+      required this.onlineID,
+      required this.name,
+      required this.code,
+      required this.customCode,
+      required this.typeId,
+      required this.purchasePrice,
+      required this.salePrice,
+      required this.cartQty});
+  factory SoldCartProduct.fromData(Map<String, dynamic> data,
+      {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return SoldCartProduct(
+      id: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}id'])!,
+      cartId: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}cart_id'])!,
+      onlineID: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}online_i_d'])!,
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
+      code: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}code'])!,
+      customCode: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}custom_code'])!,
+      typeId: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}type_id'])!,
+      purchasePrice: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}purchase_price'])!,
+      salePrice: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}sale_price'])!,
+      cartQty: const IntType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}cart_qty'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['cart_id'] = Variable<String>(cartId);
+    map['online_i_d'] = Variable<String>(onlineID);
+    map['name'] = Variable<String>(name);
+    map['code'] = Variable<String>(code);
+    map['custom_code'] = Variable<String>(customCode);
+    map['type_id'] = Variable<String>(typeId);
+    map['purchase_price'] = Variable<String>(purchasePrice);
+    map['sale_price'] = Variable<String>(salePrice);
+    map['cart_qty'] = Variable<int>(cartQty);
+    return map;
+  }
+
+  SoldCartProductsCompanion toCompanion(bool nullToAbsent) {
+    return SoldCartProductsCompanion(
+      id: Value(id),
+      cartId: Value(cartId),
+      onlineID: Value(onlineID),
+      name: Value(name),
+      code: Value(code),
+      customCode: Value(customCode),
+      typeId: Value(typeId),
+      purchasePrice: Value(purchasePrice),
+      salePrice: Value(salePrice),
+      cartQty: Value(cartQty),
+    );
+  }
+
+  factory SoldCartProduct.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return SoldCartProduct(
+      id: serializer.fromJson<int>(json['id']),
+      cartId: serializer.fromJson<String>(json['cartId']),
+      onlineID: serializer.fromJson<String>(json['onlineID']),
+      name: serializer.fromJson<String>(json['name']),
+      code: serializer.fromJson<String>(json['code']),
+      customCode: serializer.fromJson<String>(json['customCode']),
+      typeId: serializer.fromJson<String>(json['typeId']),
+      purchasePrice: serializer.fromJson<String>(json['purchasePrice']),
+      salePrice: serializer.fromJson<String>(json['salePrice']),
+      cartQty: serializer.fromJson<int>(json['cartQty']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'cartId': serializer.toJson<String>(cartId),
+      'onlineID': serializer.toJson<String>(onlineID),
+      'name': serializer.toJson<String>(name),
+      'code': serializer.toJson<String>(code),
+      'customCode': serializer.toJson<String>(customCode),
+      'typeId': serializer.toJson<String>(typeId),
+      'purchasePrice': serializer.toJson<String>(purchasePrice),
+      'salePrice': serializer.toJson<String>(salePrice),
+      'cartQty': serializer.toJson<int>(cartQty),
+    };
+  }
+
+  SoldCartProduct copyWith(
+          {int? id,
+          String? cartId,
+          String? onlineID,
+          String? name,
+          String? code,
+          String? customCode,
+          String? typeId,
+          String? purchasePrice,
+          String? salePrice,
+          int? cartQty}) =>
+      SoldCartProduct(
+        id: id ?? this.id,
+        cartId: cartId ?? this.cartId,
+        onlineID: onlineID ?? this.onlineID,
+        name: name ?? this.name,
+        code: code ?? this.code,
+        customCode: customCode ?? this.customCode,
+        typeId: typeId ?? this.typeId,
+        purchasePrice: purchasePrice ?? this.purchasePrice,
+        salePrice: salePrice ?? this.salePrice,
+        cartQty: cartQty ?? this.cartQty,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('SoldCartProduct(')
+          ..write('id: $id, ')
+          ..write('cartId: $cartId, ')
+          ..write('onlineID: $onlineID, ')
+          ..write('name: $name, ')
+          ..write('code: $code, ')
+          ..write('customCode: $customCode, ')
+          ..write('typeId: $typeId, ')
+          ..write('purchasePrice: $purchasePrice, ')
+          ..write('salePrice: $salePrice, ')
+          ..write('cartQty: $cartQty')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, cartId, onlineID, name, code, customCode,
+      typeId, purchasePrice, salePrice, cartQty);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is SoldCartProduct &&
+          other.id == this.id &&
+          other.cartId == this.cartId &&
+          other.onlineID == this.onlineID &&
+          other.name == this.name &&
+          other.code == this.code &&
+          other.customCode == this.customCode &&
+          other.typeId == this.typeId &&
+          other.purchasePrice == this.purchasePrice &&
+          other.salePrice == this.salePrice &&
+          other.cartQty == this.cartQty);
+}
+
+class SoldCartProductsCompanion extends UpdateCompanion<SoldCartProduct> {
+  final Value<int> id;
+  final Value<String> cartId;
+  final Value<String> onlineID;
+  final Value<String> name;
+  final Value<String> code;
+  final Value<String> customCode;
+  final Value<String> typeId;
+  final Value<String> purchasePrice;
+  final Value<String> salePrice;
+  final Value<int> cartQty;
+  const SoldCartProductsCompanion({
+    this.id = const Value.absent(),
+    this.cartId = const Value.absent(),
+    this.onlineID = const Value.absent(),
+    this.name = const Value.absent(),
+    this.code = const Value.absent(),
+    this.customCode = const Value.absent(),
+    this.typeId = const Value.absent(),
+    this.purchasePrice = const Value.absent(),
+    this.salePrice = const Value.absent(),
+    this.cartQty = const Value.absent(),
+  });
+  SoldCartProductsCompanion.insert({
+    this.id = const Value.absent(),
+    required String cartId,
+    required String onlineID,
+    required String name,
+    required String code,
+    required String customCode,
+    required String typeId,
+    required String purchasePrice,
+    required String salePrice,
+    required int cartQty,
+  })  : cartId = Value(cartId),
+        onlineID = Value(onlineID),
+        name = Value(name),
+        code = Value(code),
+        customCode = Value(customCode),
+        typeId = Value(typeId),
+        purchasePrice = Value(purchasePrice),
+        salePrice = Value(salePrice),
+        cartQty = Value(cartQty);
+  static Insertable<SoldCartProduct> custom({
+    Expression<int>? id,
+    Expression<String>? cartId,
+    Expression<String>? onlineID,
+    Expression<String>? name,
+    Expression<String>? code,
+    Expression<String>? customCode,
+    Expression<String>? typeId,
+    Expression<String>? purchasePrice,
+    Expression<String>? salePrice,
+    Expression<int>? cartQty,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (cartId != null) 'cart_id': cartId,
+      if (onlineID != null) 'online_i_d': onlineID,
+      if (name != null) 'name': name,
+      if (code != null) 'code': code,
+      if (customCode != null) 'custom_code': customCode,
+      if (typeId != null) 'type_id': typeId,
+      if (purchasePrice != null) 'purchase_price': purchasePrice,
+      if (salePrice != null) 'sale_price': salePrice,
+      if (cartQty != null) 'cart_qty': cartQty,
+    });
+  }
+
+  SoldCartProductsCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? cartId,
+      Value<String>? onlineID,
+      Value<String>? name,
+      Value<String>? code,
+      Value<String>? customCode,
+      Value<String>? typeId,
+      Value<String>? purchasePrice,
+      Value<String>? salePrice,
+      Value<int>? cartQty}) {
+    return SoldCartProductsCompanion(
+      id: id ?? this.id,
+      cartId: cartId ?? this.cartId,
+      onlineID: onlineID ?? this.onlineID,
+      name: name ?? this.name,
+      code: code ?? this.code,
+      customCode: customCode ?? this.customCode,
+      typeId: typeId ?? this.typeId,
+      purchasePrice: purchasePrice ?? this.purchasePrice,
+      salePrice: salePrice ?? this.salePrice,
+      cartQty: cartQty ?? this.cartQty,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (cartId.present) {
+      map['cart_id'] = Variable<String>(cartId.value);
+    }
+    if (onlineID.present) {
+      map['online_i_d'] = Variable<String>(onlineID.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (code.present) {
+      map['code'] = Variable<String>(code.value);
+    }
+    if (customCode.present) {
+      map['custom_code'] = Variable<String>(customCode.value);
+    }
+    if (typeId.present) {
+      map['type_id'] = Variable<String>(typeId.value);
+    }
+    if (purchasePrice.present) {
+      map['purchase_price'] = Variable<String>(purchasePrice.value);
+    }
+    if (salePrice.present) {
+      map['sale_price'] = Variable<String>(salePrice.value);
+    }
+    if (cartQty.present) {
+      map['cart_qty'] = Variable<int>(cartQty.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SoldCartProductsCompanion(')
+          ..write('id: $id, ')
+          ..write('cartId: $cartId, ')
+          ..write('onlineID: $onlineID, ')
+          ..write('name: $name, ')
+          ..write('code: $code, ')
+          ..write('customCode: $customCode, ')
+          ..write('typeId: $typeId, ')
+          ..write('purchasePrice: $purchasePrice, ')
+          ..write('salePrice: $salePrice, ')
+          ..write('cartQty: $cartQty')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $SoldCartProductsTable extends SoldCartProducts
+    with TableInfo<$SoldCartProductsTable, SoldCartProduct> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $SoldCartProductsTable(this.attachedDatabase, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int?> id = GeneratedColumn<int?>(
+      'id', aliasedName, false,
+      type: const IntType(),
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  final VerificationMeta _cartIdMeta = const VerificationMeta('cartId');
+  @override
+  late final GeneratedColumn<String?> cartId = GeneratedColumn<String?>(
+      'cart_id', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _onlineIDMeta = const VerificationMeta('onlineID');
+  @override
+  late final GeneratedColumn<String?> onlineID = GeneratedColumn<String?>(
+      'online_i_d', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _codeMeta = const VerificationMeta('code');
+  @override
+  late final GeneratedColumn<String?> code = GeneratedColumn<String?>(
+      'code', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _customCodeMeta = const VerificationMeta('customCode');
+  @override
+  late final GeneratedColumn<String?> customCode = GeneratedColumn<String?>(
+      'custom_code', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _typeIdMeta = const VerificationMeta('typeId');
+  @override
+  late final GeneratedColumn<String?> typeId = GeneratedColumn<String?>(
+      'type_id', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _purchasePriceMeta =
+      const VerificationMeta('purchasePrice');
+  @override
+  late final GeneratedColumn<String?> purchasePrice = GeneratedColumn<String?>(
+      'purchase_price', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _salePriceMeta = const VerificationMeta('salePrice');
+  @override
+  late final GeneratedColumn<String?> salePrice = GeneratedColumn<String?>(
+      'sale_price', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _cartQtyMeta = const VerificationMeta('cartQty');
+  @override
+  late final GeneratedColumn<int?> cartQty = GeneratedColumn<int?>(
+      'cart_qty', aliasedName, false,
+      type: const IntType(), requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        cartId,
+        onlineID,
+        name,
+        code,
+        customCode,
+        typeId,
+        purchasePrice,
+        salePrice,
+        cartQty
+      ];
+  @override
+  String get aliasedName => _alias ?? 'sold_cart_products';
+  @override
+  String get actualTableName => 'sold_cart_products';
+  @override
+  VerificationContext validateIntegrity(Insertable<SoldCartProduct> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('cart_id')) {
+      context.handle(_cartIdMeta,
+          cartId.isAcceptableOrUnknown(data['cart_id']!, _cartIdMeta));
+    } else if (isInserting) {
+      context.missing(_cartIdMeta);
+    }
+    if (data.containsKey('online_i_d')) {
+      context.handle(_onlineIDMeta,
+          onlineID.isAcceptableOrUnknown(data['online_i_d']!, _onlineIDMeta));
+    } else if (isInserting) {
+      context.missing(_onlineIDMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('code')) {
+      context.handle(
+          _codeMeta, code.isAcceptableOrUnknown(data['code']!, _codeMeta));
+    } else if (isInserting) {
+      context.missing(_codeMeta);
+    }
+    if (data.containsKey('custom_code')) {
+      context.handle(
+          _customCodeMeta,
+          customCode.isAcceptableOrUnknown(
+              data['custom_code']!, _customCodeMeta));
+    } else if (isInserting) {
+      context.missing(_customCodeMeta);
+    }
+    if (data.containsKey('type_id')) {
+      context.handle(_typeIdMeta,
+          typeId.isAcceptableOrUnknown(data['type_id']!, _typeIdMeta));
+    } else if (isInserting) {
+      context.missing(_typeIdMeta);
+    }
+    if (data.containsKey('purchase_price')) {
+      context.handle(
+          _purchasePriceMeta,
+          purchasePrice.isAcceptableOrUnknown(
+              data['purchase_price']!, _purchasePriceMeta));
+    } else if (isInserting) {
+      context.missing(_purchasePriceMeta);
+    }
+    if (data.containsKey('sale_price')) {
+      context.handle(_salePriceMeta,
+          salePrice.isAcceptableOrUnknown(data['sale_price']!, _salePriceMeta));
+    } else if (isInserting) {
+      context.missing(_salePriceMeta);
+    }
+    if (data.containsKey('cart_qty')) {
+      context.handle(_cartQtyMeta,
+          cartQty.isAcceptableOrUnknown(data['cart_qty']!, _cartQtyMeta));
+    } else if (isInserting) {
+      context.missing(_cartQtyMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  SoldCartProduct map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return SoldCartProduct.fromData(data,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $SoldCartProductsTable createAlias(String alias) {
+    return $SoldCartProductsTable(attachedDatabase, alias);
+  }
+}
+
+class SoldCartDetail extends DataClass implements Insertable<SoldCartDetail> {
+  final String cartId;
+  final String name;
+  SoldCartDetail({required this.cartId, required this.name});
+  factory SoldCartDetail.fromData(Map<String, dynamic> data, {String? prefix}) {
+    final effectivePrefix = prefix ?? '';
+    return SoldCartDetail(
+      cartId: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}cart_id'])!,
+      name: const StringType()
+          .mapFromDatabaseResponse(data['${effectivePrefix}name'])!,
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['cart_id'] = Variable<String>(cartId);
+    map['name'] = Variable<String>(name);
+    return map;
+  }
+
+  SoldCartDetailsCompanion toCompanion(bool nullToAbsent) {
+    return SoldCartDetailsCompanion(
+      cartId: Value(cartId),
+      name: Value(name),
+    );
+  }
+
+  factory SoldCartDetail.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return SoldCartDetail(
+      cartId: serializer.fromJson<String>(json['cartId']),
+      name: serializer.fromJson<String>(json['name']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'cartId': serializer.toJson<String>(cartId),
+      'name': serializer.toJson<String>(name),
+    };
+  }
+
+  SoldCartDetail copyWith({String? cartId, String? name}) => SoldCartDetail(
+        cartId: cartId ?? this.cartId,
+        name: name ?? this.name,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('SoldCartDetail(')
+          ..write('cartId: $cartId, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(cartId, name);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is SoldCartDetail &&
+          other.cartId == this.cartId &&
+          other.name == this.name);
+}
+
+class SoldCartDetailsCompanion extends UpdateCompanion<SoldCartDetail> {
+  final Value<String> cartId;
+  final Value<String> name;
+  const SoldCartDetailsCompanion({
+    this.cartId = const Value.absent(),
+    this.name = const Value.absent(),
+  });
+  SoldCartDetailsCompanion.insert({
+    required String cartId,
+    required String name,
+  })  : cartId = Value(cartId),
+        name = Value(name);
+  static Insertable<SoldCartDetail> custom({
+    Expression<String>? cartId,
+    Expression<String>? name,
+  }) {
+    return RawValuesInsertable({
+      if (cartId != null) 'cart_id': cartId,
+      if (name != null) 'name': name,
+    });
+  }
+
+  SoldCartDetailsCompanion copyWith(
+      {Value<String>? cartId, Value<String>? name}) {
+    return SoldCartDetailsCompanion(
+      cartId: cartId ?? this.cartId,
+      name: name ?? this.name,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (cartId.present) {
+      map['cart_id'] = Variable<String>(cartId.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('SoldCartDetailsCompanion(')
+          ..write('cartId: $cartId, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $SoldCartDetailsTable extends SoldCartDetails
+    with TableInfo<$SoldCartDetailsTable, SoldCartDetail> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $SoldCartDetailsTable(this.attachedDatabase, [this._alias]);
+  final VerificationMeta _cartIdMeta = const VerificationMeta('cartId');
+  @override
+  late final GeneratedColumn<String?> cartId = GeneratedColumn<String?>(
+      'cart_id', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String?> name = GeneratedColumn<String?>(
+      'name', aliasedName, false,
+      type: const StringType(), requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [cartId, name];
+  @override
+  String get aliasedName => _alias ?? 'sold_cart_details';
+  @override
+  String get actualTableName => 'sold_cart_details';
+  @override
+  VerificationContext validateIntegrity(Insertable<SoldCartDetail> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('cart_id')) {
+      context.handle(_cartIdMeta,
+          cartId.isAcceptableOrUnknown(data['cart_id']!, _cartIdMeta));
+    } else if (isInserting) {
+      context.missing(_cartIdMeta);
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
+  @override
+  SoldCartDetail map(Map<String, dynamic> data, {String? tablePrefix}) {
+    return SoldCartDetail.fromData(data,
+        prefix: tablePrefix != null ? '$tablePrefix.' : null);
+  }
+
+  @override
+  $SoldCartDetailsTable createAlias(String alias) {
+    return $SoldCartDetailsTable(attachedDatabase, alias);
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   late final $ProductsTable products = $ProductsTable(this);
   late final $RunningCartProductTable runningCartProduct =
       $RunningCartProductTable(this);
+  late final $SoldCartProductsTable soldCartProducts =
+      $SoldCartProductsTable(this);
+  late final $SoldCartDetailsTable soldCartDetails =
+      $SoldCartDetailsTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [products, runningCartProduct];
+      [products, runningCartProduct, soldCartProducts, soldCartDetails];
 }

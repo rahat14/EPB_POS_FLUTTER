@@ -118,3 +118,43 @@ Widget buildPosItem(
     ),
   );
 }
+
+Widget oldSalesProductItem(SoldCartProduct item) {
+  return Padding(
+    padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
+    child: Card(
+      elevation: 4,
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(4))),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+              child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(item.name,
+                textAlign: TextAlign.start,
+                style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black)),
+          )),
+          Flexible(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "x ${item.cartQty}",
+                  textAlign: TextAlign.start,
+                  style: TextStyle(color: Colors.black),
+                ),
+                Text("${item.salePrice} ৳  ")
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}

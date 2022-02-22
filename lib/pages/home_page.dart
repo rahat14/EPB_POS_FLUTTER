@@ -64,7 +64,7 @@ class HomePage extends StatelessWidget {
                   height: 200,
                   width: 200,
                   child: InkWell(
-                    onTap: () =>  HelperClass.showToast("NOT LINKED"),
+                    onTap: () =>  Get.toNamed("/all_sales"),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,

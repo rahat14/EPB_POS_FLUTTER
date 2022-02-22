@@ -1,3 +1,4 @@
+import 'package:epb_pos_flutter/pages/all_orders_page.dart';
 import 'package:epb_pos_flutter/pages/home_page.dart';
 import 'package:epb_pos_flutter/pages/pos_page.dart';
 import 'package:epb_pos_flutter/pages/product_list.dart';
@@ -5,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'pages/old_sales_details.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,7 +40,9 @@ class MyApp extends StatelessWidget {
         getPages: [
           GetPage(name: '/home', page: () => HomePage()),
           GetPage(name: '/pos', page: () => ProductListPage()),
-          GetPage(name: '/pos_page', page: () => PosPage())
+          GetPage(name: '/pos_page', page: () => PosPage()),
+          GetPage(name: '/all_sales', page: () => AllOrders()),
+          GetPage(name: '/sale_details', page: () => SaleDetails())
         ]);
   }
 }
