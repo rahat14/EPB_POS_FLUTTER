@@ -48,7 +48,7 @@ Widget buildProductItemRow(Product item) {
 }
 
 Widget buildPosItem(
-    RunningCartProductData item, CartController cartController) {
+    RunningCartProductData item, CartController cartController, int index) {
   return Padding(
     padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
     child: Card(
@@ -79,7 +79,7 @@ Widget buildPosItem(
                 ),
                 onPressed: () {
                   // do something
-                  cartController.updateCartSystem((item.cartQty + 1), item);
+                  cartController.updateCartSystem((item.cartQty + 1), item  , index);
                 },
               ),
               Text(
@@ -92,7 +92,7 @@ Widget buildPosItem(
                 onPressed: () {
                   // do something
                   if (item.cartQty > 0) {
-                    cartController.updateCartSystem((item.cartQty - 1), item);
+                    cartController.updateCartSystem((item.cartQty - 1), item , index);
                   } else {
                     HelperClass.showToast("Qty must be bigger than Zero. ",
                         isError: true);

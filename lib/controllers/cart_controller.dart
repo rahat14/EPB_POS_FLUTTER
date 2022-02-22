@@ -21,13 +21,14 @@ class CartController extends GetxController {
     //  CountTotal(list);
   }
 
-  void updateCartSystem(int qty, RunningCartProductData item) {
+  void updateCartSystem(int qty, RunningCartProductData item, int index) {
     var newItem = item.copyWith(cartQty: qty);
     try {
       database.updateProductInRunningCart(newItem);
     } catch (e) {
       HelperClass.showToast("Error : ${e.toString()}", isError: true);
     } finally {
+      cartProducts[index] = newItem ;
       HelperClass.showToast("Qty Updated !!");
     }
   }

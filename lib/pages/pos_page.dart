@@ -29,7 +29,7 @@ class PosPage extends StatelessWidget {
                 itemCount: cartController.cartProducts.length,
                 itemBuilder: (context, index) {
                   return buildPosItem(
-                      cartController.cartProducts[index] , cartController);
+                      cartController.cartProducts[index] , cartController , index);
                 },
               ),
             ),
