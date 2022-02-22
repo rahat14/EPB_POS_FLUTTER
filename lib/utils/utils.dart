@@ -13,7 +13,6 @@ class HelperClass {
   }
 
   static showHideProgress(ProgressDialog pd, bool isShow) {
-    print("this is NULL $isShow");
     if (isShow) {
       pd.show(
           max: 100,
@@ -56,13 +55,17 @@ class HelperClass {
     return OfflineItem;
   }
 
-  static showToast(String str) {
+  static showToast(String str, {isError = false}) {
+    var color = Colors.green;
+    if (isError) {
+      color = Colors.red;
+    }
     Fluttertoast.showToast(
         msg: str,
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
+        backgroundColor: color,
         textColor: Colors.white,
         fontSize: 16.0);
   }

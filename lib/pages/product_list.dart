@@ -1,5 +1,6 @@
 import 'package:epb_pos_flutter/controllers/database_controller.dart';
 import 'package:epb_pos_flutter/database/app_database.dart';
+import 'package:epb_pos_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -104,8 +105,16 @@ class ProductListPage extends StatelessWidget {
           int qty = int.parse(_textEditingController.value.text);
 
           if (qty > 0) {
-            offlineDatabaseController.addProductToRunningCart(
-                offlineProduct, qty);
+            try {
+              offlineDatabaseController.addProductToRunningCart(
+                  offlineProduct, qty);
+            } catch (e) {
+              HelperClass.showToast("Error : ${e.toString()}", isError: true);
+            } finally {
+              HelperClass.showToast("Product Added !!");
+              Get.back();
+            }
+            _textEditingController.clear();
           }
         },
       ),

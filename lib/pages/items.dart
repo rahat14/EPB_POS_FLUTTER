@@ -1,4 +1,6 @@
+import 'package:epb_pos_flutter/controllers/cart_controller.dart';
 import 'package:epb_pos_flutter/database/app_database.dart';
+import 'package:epb_pos_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 Widget buildProductItemRow(Product item) {
@@ -45,16 +47,15 @@ Widget buildProductItemRow(Product item) {
   );
 }
 
-Widget buildPosItem(RunningCartProductData item) {
+Widget buildPosItem(
+    RunningCartProductData item, CartController cartController) {
   return Padding(
-    padding: const EdgeInsets.fromLTRB(12.0 ,0, 12.0 ,0),
+    padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
     child: Card(
       elevation: 4,
       shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(4))),
-
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
@@ -68,6 +69,8 @@ Widget buildPosItem(RunningCartProductData item) {
                     color: Colors.black)),
           )),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               IconButton(
                 icon: const Icon(
@@ -76,9 +79,10 @@ Widget buildPosItem(RunningCartProductData item) {
                 ),
                 onPressed: () {
                   // do something
+                  cartController.updateCartSystem((item.cartQty + 1), item);
                 },
               ),
-               Text(
+              Text(
                 "${item.cartQty}",
                 textAlign: TextAlign.start,
                 style: TextStyle(color: Colors.black),
@@ -87,14 +91,22 @@ Widget buildPosItem(RunningCartProductData item) {
                 icon: const Icon(Icons.horizontal_rule, color: Colors.red),
                 onPressed: () {
                   // do something
+                  if (item.cartQty > 0) {
+                    cartController.updateCartSystem((item.cartQty - 1), item);
+                  } else {
+                    HelperClass.showToast("Qty must be bigger than Zero. ",
+                        isError: true);
+                  }
                 },
               ),
               IconButton(
+                iconSize: 20,
                 icon: const Icon(Icons.delete, color: Colors.red),
                 onPressed: () {
                   // do something
                 },
               ),
+              Text("${item.salePrice} ৳  ")
             ],
           ),
         ],

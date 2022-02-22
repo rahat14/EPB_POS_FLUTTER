@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'items.dart';
 
 class PosPage extends StatelessWidget {
-  final offlineDatabaseController = Get.put(CartController());
+  final cartController = Get.put(CartController());
 
   // ProductListPage({Key? key}) : super(key: key);
   final TextEditingController _textEditingController = TextEditingController();
@@ -26,19 +26,29 @@ class PosPage extends StatelessWidget {
             Flexible(
               child: ListView.builder(
                 shrinkWrap: false,
-                itemCount: offlineDatabaseController.cartProducts.length,
+                itemCount: cartController.cartProducts.length,
                 itemBuilder: (context, index) {
                   return buildPosItem(
-                      offlineDatabaseController.cartProducts[index]);
+                      cartController.cartProducts[index] , cartController);
                 },
               ),
             ),
             Container(height: 1, color: Colors.white),
             Container(
-              color: Colors.blueGrey,
+              color: Colors.white,
+              padding: const EdgeInsets.all(8.0),
               child: Column(
-                children: const [
-                  Text("1"),
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Flexible(
+                        child: Text("Total Price - "),
+                      ) , 
+                      Text(cartController.countTotal(cartController.cartProducts).toString()) ,
+                     const Text(" BDT  ")
+                    ],
+                  ),
                   Text("2"),
                   Text("3"),
                   Text("4"),

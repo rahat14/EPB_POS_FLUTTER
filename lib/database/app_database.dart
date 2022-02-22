@@ -86,7 +86,6 @@ class RunningCartProduct extends Table {
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
-
   @override
   int get schemaVersion => 7;
 
@@ -102,11 +101,14 @@ class AppDatabase extends _$AppDatabase {
 
   Future insertProduct(Product product) => into(products).insert(product);
 
-  Future insertProductInRunningCart(RunningCartProductCompanion item ) => into(runningCartProduct).insert(
-      item, mode: InsertMode.insertOrReplace
-  );
+  Future insertProductInRunningCart(RunningCartProductCompanion item) =>
+      into(runningCartProduct).insert(item, mode: InsertMode.insertOrReplace);
 
-  Future<List<RunningCartProductData>> getAllRunningCartProducts() => select(runningCartProduct).get();
+  Future updateProductInRunningCart(RunningCartProductData item) =>
+      update(runningCartProduct).replace(item);
+
+  Future<List<RunningCartProductData>> getAllRunningCartProducts() =>
+      select(runningCartProduct).get();
 
   Future insertProducts(List<ProductsCompanion> productss) async {
     await batch((batch) => batch.insertAll(products, productss));
