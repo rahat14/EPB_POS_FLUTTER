@@ -1,6 +1,7 @@
 import 'package:epb_pos_flutter/controllers/cart_controller.dart';
 import 'package:epb_pos_flutter/database/app_database.dart';
 import 'package:epb_pos_flutter/utils/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Widget buildProductItemRow(Product item) {
@@ -79,7 +80,8 @@ Widget buildPosItem(
                 ),
                 onPressed: () {
                   // do something
-                  cartController.updateCartSystem((item.cartQty + 1), item  , index);
+                  cartController.updateCartSystem(
+                      (item.cartQty + 1), item, index);
                 },
               ),
               Text(
@@ -92,7 +94,8 @@ Widget buildPosItem(
                 onPressed: () {
                   // do something
                   if (item.cartQty > 0) {
-                    cartController.updateCartSystem((item.cartQty - 1), item , index);
+                    cartController.updateCartSystem(
+                        (item.cartQty - 1), item, index);
                   } else {
                     HelperClass.showToast("Qty must be bigger than Zero. ",
                         isError: true);
@@ -104,6 +107,7 @@ Widget buildPosItem(
                 icon: const Icon(Icons.delete, color: Colors.red),
                 onPressed: () {
                   // do something
+                  cartController.deleteCartItem(index, item);
                 },
               ),
               Text("${item.salePrice} ৳  ")

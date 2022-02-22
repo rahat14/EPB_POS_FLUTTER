@@ -118,6 +118,9 @@ class AppDatabase extends _$AppDatabase {
 
   Future deleteAllProduct() =>
       (delete(products)..where((t) => t.id.isBiggerThanValue(0))).go();
+
+  Future deleteRunningCartItemById(int pid) =>
+      (delete(products)..where((t) => t.id.equals(pid))).go();
 }
 
 LazyDatabase _openConnection() {

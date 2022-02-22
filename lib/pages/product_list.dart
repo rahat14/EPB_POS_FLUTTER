@@ -13,6 +13,8 @@ class ProductListPage extends StatelessWidget {
   // ProductListPage({Key? key}) : super(key: key);
 
   final TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _searchEditingController =
+      TextEditingController();
 
   ProductListPage({Key? key}) : super(key: key);
 
@@ -43,6 +45,7 @@ class ProductListPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
+                      controller: _searchEditingController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         contentPadding: EdgeInsets.all(12),
@@ -51,17 +54,32 @@ class ProductListPage extends StatelessWidget {
                       minLines: 1,
                       maxLines: 1,
                       onSubmitted: (value) {
-                        thisTest();
+                        if (value.isEmpty) {
+                          offlineDatabaseController.resetSearch();
+                        } else {
+                          offlineDatabaseController
+                              .searchProduct(value.toLowerCase().trim());
+                        }
                       },
                       textInputAction: TextInputAction.search,
                     ),
                   ),
                 ),
-                SizedBox(
-                  child: Image.asset("assets/images/search_icon.png",
-                      fit: BoxFit.fill),
-                  height: 50,
-                  width: 50,
+                InkWell(
+                  onTap: () {
+                    if (_searchEditingController.value.text.isEmpty) {
+                      offlineDatabaseController.resetSearch();
+                    } else {
+                      offlineDatabaseController.searchProduct(
+                          _searchEditingController.value.text.toLowerCase());
+                    }
+                  },
+                  child: SizedBox(
+                    child: Image.asset("assets/images/search_icon.png",
+                        fit: BoxFit.fill),
+                    height: 50,
+                    width: 50,
+                  ),
                 ),
                 const SizedBox(
                   height: 50,

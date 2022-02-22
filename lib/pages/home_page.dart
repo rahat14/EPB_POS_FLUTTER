@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
                         Container(
                           alignment: Alignment.center,
                           child: Image.asset(
-                            "assets/images/icon.png",
+                            "assets/images/icons8-pos-terminal-65.png",
                             fit: BoxFit.cover,
                             height: 55,
                             width: 55,
@@ -45,9 +45,9 @@ class HomePage extends StatelessWidget {
                         ),
                         const Padding(
                           padding: EdgeInsets.all(8.0),
-                          child: Text("Welcome",
+                          child: Text("POS",
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               )),
                         )
@@ -56,45 +56,149 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              const Card(
+              Card(
                 elevation: 10,
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8))),
                 child: SizedBox(
                   height: 200,
                   width: 200,
+                  child: InkWell(
+                    onTap: () =>  HelperClass.showToast("NOT LINKED"),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          child: Image.asset(
+                            "assets/images/icons8-book-64.png",
+                            fit: BoxFit.cover,
+                            height: 55,
+                            width: 55,
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text("ALL ORDERS",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Card(
                 elevation: 10,
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8))),
                 child: SizedBox(
                   height: 200,
                   width: 200,
+                  child: InkWell(
+                    onTap: () =>  HelperClass.showToast("NOT LINKED"),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          child: Image.asset(
+                            "assets/images/icons8-cheap-2-64.png",
+                            fit: BoxFit.cover,
+                            height: 55,
+                            width: 55,
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text("EXPENSE",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Card(
                 elevation: 10,
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8))),
                 child: SizedBox(
                   height: 200,
                   width: 200,
+                  child: InkWell(
+                    onTap: () =>  HelperClass.showToast("NOT LINKED"),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          child: Image.asset(
+                            "assets/images/icons8-decline-64.png",
+                            fit: BoxFit.cover,
+                            height: 55,
+                            width: 55,
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text("REPORT",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Card(
                 elevation: 10,
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8))),
                 child: SizedBox(
                   height: 200,
                   width: 200,
+                  child: InkWell(
+                    onTap: () =>  HelperClass.showToast("NOT LINKED"),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          child: Image.asset(
+                            "assets/images/icons8-identity-64.png",
+                            fit: BoxFit.cover,
+                            height: 55,
+                            width: 55,
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text("PRODUCTS",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Card(
                 elevation: 10,
-                shape: RoundedRectangleBorder(
+                shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8))),
                 child: InkWell(
                   onTap: () => {
@@ -107,7 +211,7 @@ class HomePage extends StatelessWidget {
                       Container(
                         alignment: Alignment.center,
                         child: Image.asset(
-                          "assets/images/icon.png",
+                          "assets/images/icons8-synchronize-128.png",
                           fit: BoxFit.cover,
                           height: 55,
                           width: 55,
@@ -115,9 +219,9 @@ class HomePage extends StatelessWidget {
                       ),
                       const Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: Text("Sync",
+                        child: Text("SYNC",
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
                             )),
                       )

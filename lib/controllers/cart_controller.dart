@@ -28,8 +28,19 @@ class CartController extends GetxController {
     } catch (e) {
       HelperClass.showToast("Error : ${e.toString()}", isError: true);
     } finally {
-      cartProducts[index] = newItem ;
+      cartProducts[index] = newItem;
       HelperClass.showToast("Qty Updated !!");
+    }
+  }
+
+  void deleteCartItem(int index, RunningCartProductData item) {
+    try {
+      database.deleteRunningCartItemById(item.id);
+    } catch (e) {
+      HelperClass.showToast("Error : ${e.toString()}", isError: true);
+    } finally {
+      cartProducts.removeAt(index);
+      HelperClass.showToast("Item Removed");
     }
   }
 

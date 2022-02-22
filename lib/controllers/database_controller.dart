@@ -1,12 +1,13 @@
 import 'package:epb_pos_flutter/database/app_database.dart';
 import 'package:epb_pos_flutter/services/local_services.dart';
+import 'package:epb_pos_flutter/utils/utils.dart';
 import 'package:get/get.dart';
-
-import '../utils/utils.dart';
 
 class DatabaseController extends GetxController {
   var offlineProducts =
       List<Product>.empty().obs; // init the empty list  with null safety
+  List<Product> mainList = [];
+
   AppDatabase database = LocalService().getDatabase();
 
   @override
@@ -18,6 +19,7 @@ class DatabaseController extends GetxController {
   void fetchProducts() async {
     var list = await database.getAllProducts();
     offlineProducts.value = list;
+    mainList = list;
     print(" list size -> ${list.length}");
   }
 
@@ -49,12 +51,25 @@ class DatabaseController extends GetxController {
         cartQty: qty);
 
     database.insertProductInRunningCart(OfflineItem);
-
-
   }
 
-
-
+  void searchProduct(String search) {
+    print(" searching for $search");
+    List<Product> filteredList = [];
+    for (var item in mainList) {
+      if (item.name.toLowerCase().contains(search)) {
+        filteredList.add(item);
+      }
+    }
+    if (filteredList.isEmpty) {
+      HelperClass.showToast("No Item Found Named $search");
+    } else {
+      offlineProducts.value = filteredList;
+    }
+  }
+  void resetSearch(){
+    offlineProducts.value = mainList;
+  }
 
   void getRunningCartProducts() async {
     var list = await database.getAllProducts();
