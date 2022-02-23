@@ -1,14 +1,14 @@
-import 'package:epb_pos_flutter/controllers/database_controller.dart';
 import 'package:epb_pos_flutter/database/app_database.dart';
 import 'package:epb_pos_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../controllers/product_list_page_controller.dart';
 import 'items.dart';
 
 class ProductListPage extends StatelessWidget {
-  final offlineDatabaseController = Get.put(DatabaseController());
+  final offlineDatabaseController = Get.put(ProductListPageController());
 
   // ProductListPage({Key? key}) : super(key: key);
 
@@ -107,9 +107,6 @@ class ProductListPage extends StatelessWidget {
         );
       }),
     );
-
-    Future createStockDialgoue() =>
-        showDialog(context: context, builder: (context) => AlertDialog());
   }
 
   createStockDialogue(Product offlineProduct) {

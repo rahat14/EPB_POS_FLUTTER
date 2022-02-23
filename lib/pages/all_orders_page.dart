@@ -1,11 +1,10 @@
 import 'package:epb_pos_flutter/controllers/database_controller.dart';
+import 'package:epb_pos_flutter/controllers/orders_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AllOrders extends StatelessWidget {
-  final DatabaseController offlineDatabaseController = Get.put(DatabaseController());
-
-  // ProductListPage({Key? key}) : super(key: key);
+  final OrdersController offlineDatabaseController = Get.put(OrdersController());
 
   AllOrders({Key? key}) : super(key: key);
 

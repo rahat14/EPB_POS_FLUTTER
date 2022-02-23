@@ -1,12 +1,11 @@
-import 'package:epb_pos_flutter/controllers/database_controller.dart';
-import 'package:epb_pos_flutter/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controllers/orders_controller.dart';
 import 'items.dart';
 
 class SaleDetails extends StatelessWidget {
-  final controller = Get.put(DatabaseController());
+  final controller = Get.put(OrdersController());
 
   SaleDetails({Key? key}) : super(key: key);
 
